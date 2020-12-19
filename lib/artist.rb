@@ -1,3 +1,4 @@
+require 'pry'
 class Artist
 
     attr_accessor :name
@@ -13,9 +14,8 @@ class Artist
     end
 
     def new_song(name, genre)
-        Song.new(name, genre, self)
-
-    end
+        Song.new(name, self, genre)
+      end
 
     def songs
         Song.all.select do |song|
@@ -23,9 +23,9 @@ class Artist
         end
     end
 
-    def genres(name, song)
-        Genre.all.select do | song |
-            song.genre == self
+    def genres
+        songs.map do | song |
+            song.genre
         end
 
     end
